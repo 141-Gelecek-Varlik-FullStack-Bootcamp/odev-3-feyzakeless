@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Pharmacy.Model;
+using Pharmacy.Model.ModelPrescription;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,9 @@ namespace Pharmacy.Service.PrescriptionServiceLayer
 {
     public interface IPrescriptionService
     {
+        public General<PrescriptionViewModel> Insert(PrescriptionViewModel newPrescription);
+        public General<PrescriptionViewModel> GetPrescription();
+        public General<PrescriptionViewModel> Update(int id, PrescriptionViewModel prescription);
+        public General<PrescriptionViewModel> Delete(int id);
     }
 }
