@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Pharmacy.API.Infrastructure;
+using Pharmacy.Service.MedicineServiceLayer;
+using Pharmacy.Service.PrescriptionServiceLayer;
 using Pharmacy.Service.UserServiceLayer;
 using System;
 using System.Collections.Generic;
@@ -33,7 +35,10 @@ namespace Pharmacy.API
             IMapper mapper = _mappingProfile.CreateMapper(); 
             services.AddSingleton(mapper);
 
+            //Dependency Injection
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IMedicineService, MedicineService>();
+            services.AddTransient<IPrescriptionService, PrescriptionService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
