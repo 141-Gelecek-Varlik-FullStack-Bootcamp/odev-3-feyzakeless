@@ -9,7 +9,6 @@ namespace Pharmacy.DB.Entities.DataContext
 {
     public partial class PharmacyContext : DbContext
     {
-        //Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Pharmacy;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities -Contextdir Entities/DataContext -Context PharmacyContext -Project Pharmacy.DB -StartUpProject Pharmacy.DB -NoPluralize -Force
         public PharmacyContext()
         {
         }
@@ -19,6 +18,7 @@ namespace Pharmacy.DB.Entities.DataContext
         {
         }
 
+        public virtual DbSet<Enum> Enum { get; set; }
         public virtual DbSet<Medicine> Medicine { get; set; }
         public virtual DbSet<Prescription> Prescription { get; set; }
         public virtual DbSet<User> User { get; set; }
@@ -35,6 +35,16 @@ namespace Pharmacy.DB.Entities.DataContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<Enum>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.AuthorizeType)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
 
             modelBuilder.Entity<Medicine>(entity =>
             {
@@ -95,6 +105,18 @@ namespace Pharmacy.DB.Entities.DataContext
                     .HasColumnName("UDate");
 
                 entity.Property(e => e.Uuser).HasColumnName("UUser");
+
+                entity.HasOne(d => d.ImedicineNavigation)
+                    .WithMany(p => p.Prescription)
+                    .HasForeignKey(d => d.Imedicine)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Prescription_Medicine");
+
+                entity.HasOne(d => d.IuserNavigation)
+                    .WithMany(p => p.Prescription)
+                    .HasForeignKey(d => d.Iuser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Prescription_User");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -131,6 +153,12 @@ namespace Pharmacy.DB.Entities.DataContext
                     .HasColumnName("UDatetime");
 
                 entity.Property(e => e.Uuser).HasColumnName("UUser");
+
+                entity.HasOne(d => d.Authorize)
+                    .WithMany(p => p.User)
+                    .HasForeignKey(d => d.AuthorizeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_User_Enum");
             });
 
             OnModelCreatingPartial(modelBuilder);
