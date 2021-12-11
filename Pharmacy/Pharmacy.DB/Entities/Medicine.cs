@@ -7,6 +7,11 @@ namespace Pharmacy.DB.Entities
 {
     public partial class Medicine
     {
+        public Medicine()
+        {
+            Prescription = new HashSet<Prescription>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string TicketCode { get; set; }
@@ -21,5 +26,6 @@ namespace Pharmacy.DB.Entities
         public int? Uuser { get; set; }
 
         public virtual User IuserNavigation { get; set; }
+        public virtual ICollection<Prescription> Prescription { get; set; }
     }
 }
