@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pharmacy.Service.MedicineServiceLayer
 {
+    //İlac Interface i olusturuldu.
     public interface IMedicineService
     {
         public General<MedicineViewModel> Insert(MedicineViewModel newmedicine);

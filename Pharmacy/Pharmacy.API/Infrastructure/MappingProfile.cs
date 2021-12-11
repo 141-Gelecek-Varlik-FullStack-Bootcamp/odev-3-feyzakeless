@@ -9,7 +9,7 @@ namespace Pharmacy.API.Infrastructure
     {
         public MappingProfile()
         {
-            //Kullanıcı Mapping
+            //Kullanici Mapping
             CreateMap<UserViewModel, Pharmacy.DB.Entities.User>();
             CreateMap<Pharmacy.DB.Entities.User, UserViewModel>();
 

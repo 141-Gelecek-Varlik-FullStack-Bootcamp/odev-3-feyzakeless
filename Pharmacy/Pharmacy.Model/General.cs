@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pharmacy.Model
 {
+    // Genel ozelliklerin tanımlandigi model
     public class General<T>
     {
         public bool IsSuccess { get; set; }

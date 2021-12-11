@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pharmacy.Model.ModelPrescription
 {
+    // Recete modeli olusturuldu
     public class PrescriptionViewModel
     {
         public string Name { get; set; }

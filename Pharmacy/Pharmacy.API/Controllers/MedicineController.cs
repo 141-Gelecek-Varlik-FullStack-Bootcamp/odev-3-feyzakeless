@@ -27,14 +27,6 @@ namespace Pharmacy.API.Controllers
             var result = false;
             return medicineService.Insert(newProduct);
         }
-
-        //İlac Listeleme
-        [HttpGet]
-        public General<MedicineViewModel> GetMedicines()
-        {
-            return medicineService.GetMedicines();
-        }
-
         //İlac id sine gore guncelleme
         [HttpPut("{id}")]
         public General<MedicineViewModel> Update(int id, MedicineViewModel product)
@@ -48,6 +40,15 @@ namespace Pharmacy.API.Controllers
         {
             return medicineService.Delete(id);
         }
+
+        //İlac Listeleme
+        [HttpGet]
+        public General<MedicineViewModel> GetMedicines()
+        {
+            return medicineService.GetMedicines();
+        }
+
+        
 
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pharmacy.Service.UserServiceLayer
 {
+    //Kullanici Interface i olusturuldu.
     public interface IUserService
     {
         public bool Login(string mail, string password);

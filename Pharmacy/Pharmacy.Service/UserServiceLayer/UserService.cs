@@ -13,27 +13,15 @@ namespace Pharmacy.Service.UserServiceLayer
 {
     public class UserService : IUserService 
     {
-        private readonly IMapper mapper; //Mapper çağrıldı
+        private readonly IMapper mapper; //Mapper çagrildi
 
         public UserService(IMapper _mapper)
         {
             mapper = _mapper;
         }
 
-        // kullanıcı giriş işlemi
-        public bool Login(string mail, string password)
-        {
-            bool result = false;
-            using (var srv = new PharmacyContext())
-            {
-                result = srv.User.Any(a => !a.IsDeleted && a.Email == mail && a.Password == password);
 
-            }
-            return result;
-        }
-
-
-        //kullanıcı kayıt işlemi
+        //kullanici kayıt islemi
         public General<UserViewModel> Insert(UserViewModel newUser)
         {
             var result = new General<UserViewModel>() { IsSuccess = false };
@@ -58,7 +46,20 @@ namespace Pharmacy.Service.UserServiceLayer
             return result;
         }
 
-        //kullanıcıların listelendiği metod
+        // kullanici giris islemi
+        public bool Login(string mail, string password)
+        {
+            bool result = false;
+            using (var srv = new PharmacyContext())
+            {
+                result = srv.User.Any(a => !a.IsDeleted && a.Email == mail && a.Password == password);
+
+            }
+            return result;
+        }
+
+
+        //kullanicilarin listelendigi metod
         public General<UserViewModel> GetUsers()
         {
             var result = new General<UserViewModel>();
@@ -83,7 +84,7 @@ namespace Pharmacy.Service.UserServiceLayer
             return result;
         }
 
-        //kullanıcı güncelleme işlemi
+        //kullanici guncelleme islemi
         public General<UserViewModel> Update(int id, UserViewModel user)
         {
             var result = new General<UserViewModel>();
@@ -115,7 +116,7 @@ namespace Pharmacy.Service.UserServiceLayer
             return result;
         }
 
-        //kullanıcı silme işlemi
+        //kullanici silme islemi
         public General<UserViewModel> Delete(int id)
         {
             var result = new General<UserViewModel>();
@@ -142,6 +143,8 @@ namespace Pharmacy.Service.UserServiceLayer
             return result;
         }
 
+
+        //Authorized id si 1 olanlari(Hasta olanlari) cekme
         public List<Pharmacy.DB.Entities.User> GetPatients()
         {
             using (var context = new PharmacyContext())

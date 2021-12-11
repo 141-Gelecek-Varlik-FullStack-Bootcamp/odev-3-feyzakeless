@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pharmacy.Model.ModelMedicine
 {
+    //İlac modeli olusturuldu
     public class MedicineViewModel
     {
         public string Name { get; set; }

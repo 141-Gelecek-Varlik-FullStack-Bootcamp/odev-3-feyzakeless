@@ -21,7 +21,7 @@ namespace Pharmacy.API.Controllers
             mapper = _mapper;
         }
 
-        //Kişi ekleme
+        //Kullanici kayit ekleme
         [HttpPost]
         public General<UserViewModel> Insert([FromBody] UserViewModel newUser)
         {
@@ -29,36 +29,36 @@ namespace Pharmacy.API.Controllers
             return userService.Insert(newUser);
         }
 
-        //Login işlemi
-        [LoginFilter]
+        //Login islemi
+        [LoginFilter] //Attribute
         [HttpPost("login")]
         public bool Login(string mail, string password)
         {
             return userService.Login(mail, password);
         }
 
-        //Tüm kullacıları listeleme
+        //Tum kullacilari listeleme
         [HttpGet]
         public General<UserViewModel> GetUsers()
         {
             return userService.GetUsers();
         }
 
-        //id ye göre kullanıcı güncelleme
+        //id ye göre kullanıcı guncelleme
         [HttpPut("{id}")]
         public General<UserViewModel> Update(int id, [FromBody] UserViewModel user)
         {
             return userService.Update(id, user);
         }
 
-        //kullanıcı silme
+        //kullanici silme
         [HttpDelete]
         public General<UserViewModel> Delete(int id)
         {
             return userService.Delete(id);
         }
 
-        //Hastaları Listeleme
+        //Hastalari Listeleme
         [HttpGet("patients")]
         public List<Pharmacy.DB.Entities.User> GetPatients()
         {

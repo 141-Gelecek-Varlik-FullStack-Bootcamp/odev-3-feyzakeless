@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pharmacy.Model.ModelUser
 {
+    //Kullanici modeli olusturuldu
     public class UserViewModel
     {
         public int AuthorizeId { get; set; }

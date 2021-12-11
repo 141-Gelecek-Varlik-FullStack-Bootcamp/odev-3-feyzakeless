@@ -39,31 +39,6 @@ namespace Pharmacy.Service.PrescriptionServiceLayer
             return result;
         }
 
-        //Recete Listeleme
-        public General<PrescriptionViewModel> GetPrescription()
-        {
-            var result = new General<PrescriptionViewModel>();
-
-            using (var context = new PharmacyContext())
-            {
-                var data = context.Prescription
-                    .Where(x => x.IsActive && !x.IsDeleted)
-                    .OrderBy(x => x.Id);
-
-                if (data.Any())
-                {
-                    result.List = mapper.Map<List<PrescriptionViewModel>>(data);
-                    result.IsSuccess = true;
-                }
-                else
-                {
-                    result.ExceptionMessage = "Hiçbir recete bulunamadı.";
-                }
-            }
-
-            return result;
-        }
-
         //Recete Guncelleme
         public General<PrescriptionViewModel> Update(int id, PrescriptionViewModel prescription)
         {
@@ -87,7 +62,7 @@ namespace Pharmacy.Service.PrescriptionServiceLayer
                 }
                 else
                 {
-                    result.ExceptionMessage = "Hiçbir recete bulunamadı.";
+                    result.ExceptionMessage = "Guncellenecek recete bulunamadı.";
                 }
             }
 
@@ -113,12 +88,39 @@ namespace Pharmacy.Service.PrescriptionServiceLayer
                 }
                 else
                 {
-                    result.ExceptionMessage = "Hiçbir recete bulunamadı.";
+                    result.ExceptionMessage = "Silinecek recete bulunamadı.";
                     result.IsSuccess = false;
                 }
             }
 
             return result;
         }
+
+        //Recete Listeleme
+        public General<PrescriptionViewModel> GetPrescription()
+        {
+            var result = new General<PrescriptionViewModel>();
+
+            using (var context = new PharmacyContext())
+            {
+                var data = context.Prescription
+                    .Where(x => x.IsActive && !x.IsDeleted)
+                    .OrderBy(x => x.Id);
+
+                if (data.Any())
+                {
+                    result.List = mapper.Map<List<PrescriptionViewModel>>(data);
+                    result.IsSuccess = true;
+                }
+                else
+                {
+                    result.ExceptionMessage = "Hiçbir recete bulunamadı.";
+                }
+            }
+
+            return result;
+        }
+
+        
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pharmacy.Service.PrescriptionServiceLayer
 {
+    //Recete Interface i olusturuldu.
     public interface IPrescriptionService
     {
         public General<PrescriptionViewModel> Insert(PrescriptionViewModel newPrescription);
